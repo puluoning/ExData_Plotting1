@@ -1,0 +1,16 @@
+library(lubridate)
+fileName <- "household_power_consumption.txt"
+top5rows <- read.table(fileName, header = TRUE, sep = ";", na.string = "?", nrows = 5)
+classes <- sapply(top5rows, class)
+raw_data <- read.table(fileName, header = TRUE, sep = ";", na.string = "?", colClasses = classes)
+selected <- raw_data[raw_data$Date == "1/2/2007"| raw_data$Date == '2/2/2007',]
+rm(raw_data)
+selected$Date <- as.Date(strptime(selected$Date, "%d/%m/%Y"))
+selected$Time <- hms(selected$Time)
+selected <-  cbind(selected, DateTime = selected$Date + selected$Time)
+png(file = "plot3.png")
+plot(selected$DateTime, selected$Sub_metering_1,type="l",xlab="",ylab="Energy submetering",col="black")
+lines(selected$DateTime, selected$Sub_metering_2,type="l",xlab="",ylab="Energy submetering",col="red")
+lines(selected$DateTime, selected$Sub_metering_3,type="l",xlab="",ylab="Energy submetering",col="blue")
+legend("topright",c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), col = c("Black", "red","blue"),lty = c(1,1))
+dev.off()
