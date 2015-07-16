@@ -15,7 +15,7 @@ with(selected, {plot(DateTime, Global_active_power,type="l",ylab = "Global Activ
                 plot(DateTime, Sub_metering_1, type="l", xlab="",ylab="Energy submetering",col="black")
                 lines(DateTime, Sub_metering_2,type="l",xlab="",ylab="Energy submetering",col="red")
                 lines(DateTime, Sub_metering_3,type="l",xlab="",ylab="Energy submetering",col="blue")
-                legend("topright",c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), col = c("Black", "red","blue"),lty = c(1,1))
+                legend("topright",c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), col = c("Black", "red","blue"),bty = "n",lty = c(1,1))
                 plot(DateTime, Global_reactive_power, type = "l",xlab = "datetime", ylab="Global_reactive_power")
 })
 dev.off()
